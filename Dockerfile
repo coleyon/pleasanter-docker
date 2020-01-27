@@ -32,11 +32,5 @@ COPY pleasanter.sh cmdnetcore/pleasanter.sh
 RUN chmod 744 cmdnetcore/*.sh \
 	&& cmdnetcore/build.sh
 
-# CMD ["/bin/sh", "-c", "while :; do sleep 10; done"]
-# RUN cmdnetcore/codedefiner.sh
-# CMD ["cmdnetcore/pleasanter.sh"]
-# CMD [ "/bin/bash" "./entrypoint.sh"]
-
 EXPOSE 80 1433
-# RUN /opt/mssql/bin/sqlservr & cmdnetcore/codedefiner.sh
 CMD ["/usr/bin/supervisord", "-n", "-c", "/usr/local/etc/supervisord.conf"]
