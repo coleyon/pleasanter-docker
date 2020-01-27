@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  csweb:
+    ports:
+      - "1433:1433"
+      - "80:80"
+    build:
+      context: .
+      args:
+        ACCEPT_EULA: Y
+        SA_PASSWORD: Password1
+        MSSQL_PID: Express
+    user: root
+#     volumes:
+#       - mssql-data:/var/opt/mssql
+#       - csweb-data:/home/Pleasanter.NetCore
+
+# volumes:
+#   mssql-data:
+#     driver: local
+#   csweb-data:
+#     driver: local
