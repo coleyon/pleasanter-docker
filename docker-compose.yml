@@ -15,21 +15,21 @@ services:
       - DB_EXTENSION=pg_trgm
     volumes:
       - ./postgres/init:/docker-entrypoint-initdb.d
-  #    - db-data:/var/lib/postgresql/data
-  csweb:
+      - db-data:/var/lib/postgresql/data
+  pleasanter-web:
     ports:
       - "80:80"
     build:
       context: pleasanter/.
       args:
       # バージョンを指定
-      # 
+      # 1.1.3.2 : cea284d8c57f4794da821c76d5676d0078b30ae0
           - GIT_HASH=cea284d8c57f4794da821c76d5676d0078b30ae0
-#    volumes:
-#      - csweb-data:/home/Pleasanter.NetCore
 
-#volumes:
-#   csweb-data:
-#     driver: local
-#   db-data:
-#     driver: local
+volumes:
+   db-data:
+     driver: local
+    # Compose の外ですでに作成済みの volume を指定する場合は ture を設定する。
+    # そうすると、 docker-compose up 時に Compose は volume を作成しようとしません。
+    # かつ、指定した volume が存在しないとエラーを raise します。
+    #external: true
