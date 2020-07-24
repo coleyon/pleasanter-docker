@@ -26,3 +26,7 @@ access to ``http://localhost`` .
 
     user: Administrator
     pass: pleasanter
+
+**参考**
+[Pleasanterをサクッと起動できるcompose](https://qiita.com/coleyon/items/8ca7830cdb0515f370de)
+[Docker上で動かしてみた公式記事](https://pleasanter.hatenablog.jp/entry/2019/04/08/191954)
