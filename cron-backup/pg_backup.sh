@@ -4,7 +4,7 @@
 ZIP_PASSWORD='Vi8PRhxL'
 
 # バックアップファイルを残しておく日数
-PERIOD='+10'
+PERIOD='+90'
 
 # バックアップ先ディレクトリ
 SAVEPATH_BASE='/var/backup/'
@@ -36,3 +36,5 @@ popd
 # 保存期間が過ぎたファイルの削除
 find $SAVEPATH_BASE -type f -daystart -mtime $PERIOD -exec rm {} \;
 
+# 空になったディレクトリを消去
+find $SAVEPATH_BASE -type d -empty -delete

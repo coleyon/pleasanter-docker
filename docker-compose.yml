@@ -13,9 +13,12 @@ services:
       - POSTGRES_DB=testdb
       - DATABASE_HOST=localhost
       - DB_EXTENSION=pg_trgm
+    #command: 'postgres -c config_file="/etc/postgresql.conf"'
     volumes:
       - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./postgres/conf/postgresql.conf:/etc/postgresql.conf
       - db-data:/var/lib/postgresql/data
+      - db-arclog:/var/lib/postgresql/arclog
   pleasanter-web:
     ports:
       - "80:80"
@@ -25,6 +28,13 @@ services:
       # バージョンを指定
       # 1.1.3.2 : cea284d8c57f4794da821c76d5676d0078b30ae0
           - GIT_HASH=cea284d8c57f4794da821c76d5676d0078b30ae0
+  cron-backup:
+    build:
+      context: cron-backup/.
+    volumes:
+      - .:/var/backup_sh2
+      - db-data:/var/lib/postgresql/data
+      - db-arclog:/var/lib/postgresql/arclog
 
 volumes:
    db-data:
@@ -33,3 +43,5 @@ volumes:
     # そうすると、 docker-compose up 時に Compose は volume を作成しようとしません。
     # かつ、指定した volume が存在しないとエラーを raise します。
     #external: true
+   db-arclog:
+    driver: local
