@@ -38,5 +38,6 @@ WORKDIR /root
 RUN echo "*:*:*:*:mysecretpassword1234" > /root/.pgpass
 RUN chmod 600 .pgpass
 COPY pg_dumpall.sh /var/backup_sh/pg_dumpall.sh
+COPY pg_rman.sh /var/backup_sh/pg_rman.sh
 
 CMD busybox crond -l 2 -L /dev/stderr -f
