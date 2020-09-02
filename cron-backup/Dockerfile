@@ -17,7 +17,7 @@ RUN  echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg m
   apt -y install postgresql-client-12
 
 # バックアップに使用するツール
-RUN apt-get -y install p7zip-full emacs-nox
+RUN apt-get -y install p7zip-full
 
 # pg_rmanのビルドツールをインストール
 WORKDIR /root
@@ -37,6 +37,6 @@ RUN apt-get -y clean \
 WORKDIR /root
 RUN echo "*:*:*:*:mysecretpassword1234" > /root/.pgpass
 RUN chmod 600 .pgpass
-COPY pg_backup.sh /var/backup_sh/pg_backup.sh
+COPY pg_dumpall.sh /var/backup_sh/pg_dumpall.sh
 
 CMD busybox crond -l 2 -L /dev/stderr -f

@@ -13,7 +13,7 @@ services:
       - POSTGRES_DB=testdb
       - DATABASE_HOST=localhost
       - DB_EXTENSION=pg_trgm
-    #command: 'postgres -c config_file="/etc/postgresql.conf"'
+    command: 'postgres -c config_file="/etc/postgresql.conf"'
     volumes:
       - ./postgres/init:/docker-entrypoint-initdb.d
       - ./postgres/conf/postgresql.conf:/etc/postgresql.conf
