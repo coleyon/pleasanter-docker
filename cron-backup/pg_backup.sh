@@ -7,17 +7,13 @@ ZIP_PASSWORD='Vi8PRhxL'
 PERIOD='+90'
 
 # バックアップ先ディレクトリ
-SAVEPATH_BASE='/var/backup'
+SAVEPATH_BASE='/var/backup/dumpall'
 # 日付
 DATE=`date '+%Y%m%d-%H%M%S'`
 # 先頭文字
 PREFIX='postgres-'
 # 拡張子
 EXT='.sql'
-
-# 作業用のディレクトリ作成
-WORK_DIR=$(mktemp -d)
-trap "rm -rf $WORK_DIR" EXIT # 最後に実行されるコマンドを登録
 
 #バックアップディレクトリ作成
 SAVEPATH=$SAVEPATH_BASE/`date '+%Y%m'`/
