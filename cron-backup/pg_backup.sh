@@ -7,9 +7,7 @@ ZIP_PASSWORD='Vi8PRhxL'
 PERIOD='+90'
 
 # バックアップ先ディレクトリ
-SAVEPATH_BASE='/var/backup/'
-# データーベース名
-DBNAME='Implem.Pleasanter'
+SAVEPATH_BASE='/var/backup'
 # 日付
 DATE=`date '+%Y%m%d-%H%M%S'`
 # 先頭文字
@@ -26,12 +24,9 @@ SAVEPATH=$SAVEPATH_BASE/`date '+%Y%m'`/
 mkdir -p $SAVEPATH
 
 # バックアップ実行
-pushd $WORK_DIR
+BACKUP_FILE_NAME=$PREFIX$DATE$EXT
 BACKUP_FILE=$SAVEPATH$PREFIX$DATE$EXT
-pg_dump -h postgres-db -p 5432  -U postgres  $DBNAME > $BACKUP_FILE
-7z a -mx=9 -mhe=on -p$ZIP_PASSWORD $BACKUP_FILE.7z $BACKUP_FILE
-rm $BACKUP_FILE
-popd
+time nice -n 19 pg_dumpall -h postgres-db -p 5432  -U postgres | 7z a -mx=9 -mhe=on -p$ZIP_PASSWORD -si$BACKUP_FILE_NAME $BACKUP_FILE.7z
 
 # 保存期間が過ぎたファイルの削除
 find $SAVEPATH_BASE -type f -daystart -mtime $PERIOD -exec rm {} \;
