@@ -1,2 +1,0 @@
-# 毎日3時にバックアップを行う
-0 3 * * * /var/backup_sh/pg_dumpall.sh
