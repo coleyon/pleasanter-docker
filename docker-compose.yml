@@ -1,8 +1,8 @@
 version: "3.7"
 
 # 共通環境変数を定義
-x-var: &APP_DB_data "db-data:/var/lib/postgresql/data"
-x-var: &APP_DB_arclog "db-arclog:/var/lib/postgresql/arclog"
+x-var-db-data: &APP_DB_data "db-data:/var/lib/postgresql/data"
+x-var-db-arclog: &APP_DB_arclog "db-arclog:/var/lib/postgresql/arclog"
 
 services:
   postgres-db:
@@ -32,7 +32,7 @@ services:
         # バージョンを指定
         # 1.1.3.2 : cea284d8c57f4794da821c76d5676d0078b30ae0
         - GIT_HASH=cea284d8c57f4794da821c76d5676d0078b30ae0
-  pleasanter-cron-backup:
+  cron-backup:
     build:
       context: cron-backup/.
     volumes:
@@ -41,6 +41,10 @@ services:
       # 自動バックアップされた結果は「/var/db_backup」に格納される。
       # コンテナの外からアクセスする場合は、このパスを外から見える所に配置しておく
       - db-backup:/var/db_backup
+      # S3で自動バックアップする場合
+      # aws cliの設定を以下パスに行う。
+      # 存在しない場合はバックアップは行われない
+      #- ./cron-backup/config/aws-cli:/root/.aws/
 
 volumes:
   db-data:
@@ -54,4 +58,3 @@ volumes:
     # dbのバックアップ領域
   db-backup:
     driver: local
-
