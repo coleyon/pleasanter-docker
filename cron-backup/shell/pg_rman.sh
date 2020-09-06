@@ -43,5 +43,9 @@ else
 fi
 
 #バリデーションチェック
-time nice -n 19 pg_rman validate 
+time nice -n 19 pg_rman validate
+
+# S3同期を行う
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ${SCRIPT_DIR}/syncToS3.sh
 

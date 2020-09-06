@@ -29,3 +29,7 @@ find $SAVEPATH_BASE -type f -daystart -mtime $PERIOD -exec rm {} \;
 
 # 空になったディレクトリを消去
 find $SAVEPATH_BASE -type d -empty -delete
+
+# S3同期を行う
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ${SCRIPT_DIR}/syncToS3.sh
