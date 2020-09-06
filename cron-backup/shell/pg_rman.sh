@@ -7,7 +7,7 @@ export PATH=$PATH:/usr/lib/postgresql/12/bin/
 PERIOD='+90'
 
 # バックアップ先ディレクトリ
-SAVEPATH_BASE='/var/backup/PITR'
+SAVEPATH_BASE='/var/db_backup/PITR'
 export BACKUP_PATH=$SAVEPATH_BASE
 export PGDATA=/var/lib/postgresql/data
 export ARCLOG_PATH=/var/lib/postgresql/arclog

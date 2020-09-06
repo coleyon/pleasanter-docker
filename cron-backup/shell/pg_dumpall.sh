@@ -7,7 +7,7 @@ ZIP_PASSWORD='Vi8PRhxL'
 PERIOD='+90'
 
 # バックアップ先ディレクトリ
-SAVEPATH_BASE='/var/backup/dumpall'
+SAVEPATH_BASE='/var/db_backup/dumpall'
 # 日付
 DATE=`date '+%Y%m%d-%H%M%S'`
 # 先頭文字

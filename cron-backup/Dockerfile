@@ -26,13 +26,13 @@ RUN apt-get -y install p7zip-full
 
 # pg_rmanのビルドツールをインストール
 WORKDIR /root
-RUN apt update &&\ 
+RUN apt update &&\
   apt-get install -y gcc make libpq-dev zlib1g-dev libpam0g-dev libssl-dev libselinux1-dev libkrb5-dev libedit-dev postgresql-server-dev-12
 RUN wget https://github.com/ossc-db/pg_rman/releases/download/V${RMAN_VER}/pg_rman-${RMAN_VER}-pg${PG_VER}.tar.gz &&\
   tar xvfz pg_rman-${RMAN_VER}-pg${PG_VER}.tar.gz && \
   cd pg_rman-${RMAN_VER}-pg${PG_VER} && \
   make &&\
-  make install 
+  make install
 
 # キャッシュを消去
 RUN apt-get -y clean \
