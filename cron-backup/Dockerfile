@@ -34,6 +34,14 @@ RUN wget https://github.com/ossc-db/pg_rman/releases/download/V${RMAN_VER}/pg_rm
   make &&\
   make install
 
+# S3用自動バックアップ用にAWS　CLIをインストール
+RUN apt update &&\
+  apt-get install -y curl unzip less
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &&\
+  unzip awscliv2.zip &&\
+  ./aws/install &&\
+  /usr/local/bin/aws --version
+
 # キャッシュを消去
 RUN apt-get -y clean \
   && rm -rf /var/lib/apt/lists/*
